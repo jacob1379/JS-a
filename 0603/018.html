@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div><span id="a">83.25</span></div>
+    <div><span id="b"></span></div>
+    <div><span id="c">35</span></div>
+    <div><span id="d"></span></div>
+
+    <script>
+        // 83.25는 제곱미터다. 11번째줄에 몇 평인지 출력
+
+        let first = document.querySelector('#a').innerHTML;
+        let a = parseInt(first);
+        let area = Math.floor(83.25 / 3.3058);
+        document.querySelector('#b').innerHTML = (area + "평");
+
+        // 35는 섭씨온도다. 13번째줄에 화씨 온도를 출력
+        
+        let second = document.querySelector('#c').innerHTML;
+        let c = parseInt(second);
+        let 화씨 = ((35 * 9/5) + 32);
+        document.querySelector('#d').innerHTML = (화씨 + "F");
+    </script>
+</body>
+</html>

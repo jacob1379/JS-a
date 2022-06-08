@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--버튼을 클릭하면 자기 이름을 alert이나 console.log로 출력하시오
+        onblur는 커서를 놓으면 쓰여진 값이 저절로 넘어감
+    -->
+    <input type="text" id="name" onblur="print()">
+    <button onclick="print()">클릭</button>
+    <script>
+        function print() {
+            const name = document.querySelector('#name').value;
+            console.log(name);
+        }
+            console.log("aaaa");
+    </script>
+</body>
+
+</html>

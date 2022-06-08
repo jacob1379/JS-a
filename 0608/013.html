@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+        반지름을 입력받아 원의 면적을 출력하시오
+        pi*반*반
+     -->
+     <input type="text" id="rad" onblur=print()>
+     <button onclick="print()">확인</button>
+     <div>원의 면적 :<span id="area"></span></div>
+     <script>
+         function print() {
+             const rad = document.querySelector('#rad').value;
+             const pi = 3.14;
+             const area = rad * rad * pi;
+             document.querySelector('#area').innerHTML = area;
+         }
+     </script>
+</body>
+</html>

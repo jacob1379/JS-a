@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        const menu = [];
+        let index = 0;
+        function ooo() {
+            const small = document.querySelector('#small').value;
+            menu[index] = small;
+            index++;
+            console.log(menu);
+            document.querySelector('#result').innerHTML = menu;
+        }
+        function ttt() {
+            const big = document.querySelector('#big').value;
+            menu[index] = big;
+            index++;
+            console.log(menu);
+        }
+    </script>
+</head>
+<body>
+    <!-- 
+        짜장, 짬뽕, 볶음밥 -> select
+        탕수육, 깐풍기, 라조기 -> radio
+
+        select나 radio에서 선택하면 배열에 추가해서 출력하시오
+        [짜장, 짬뽕, 탕수육]
+     -->
+     <select id="small">
+         <option disabled selected>메뉴를 선택하세요.</option>
+         <option>짜장</option>
+         <option>짬뽕</option>
+         <option>볶음밥</option>
+     </select>
+     <button onclick="ooo();">선택</button>
+     <br>
+     <select id="big">
+         <option disabled selected>메뉴를 선택하세요.</option>
+         <option>탕수육</option>
+         <option>깐풍기</option>
+         <option>라조기</option>
+     </select>
+     <button onclick="ttt();">선택</button>
+     <div id="result"></div>
+</body>
+</html>

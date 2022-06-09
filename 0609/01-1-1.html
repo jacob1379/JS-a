@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script>
+        let count = 0;
+        function init() {
+        document.querySelector('#target').innerHTML = count;
+        }
+        function up() {
+            count++;
+            document.querySelector('#target').innerHTML = count;
+            //const a = parseInt(document.querySelector('#target').innerHTML)
+            //document.querySelector('#target').innerHTML = a + 1;
+        }
+        function down() {
+            count--;
+            document.querySelector('#target').innerHTML = count;
+        }
+    </script>
+</head>
+<body onload="init();">
+    <!-- 카운트하기 -->
+    <div id="target"></div>
+    <button onclick="up()">증가</button>
+    <button onclick="down()">감소</button>
+
+    
+</body>
+</html>

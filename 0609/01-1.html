@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="init();">
+    <!-- 카운트하기 -->
+    <div id="target"></div>
+    <button onclick="up()">증가</button>
+
+    <script>
+        function init() {
+        document.querySelector('#target').innerHTML = 0;
+        }
+        function up() {
+            const a = parseInt(document.querySelector('#target').innerHTML)
+            // count ++; (후위) 하고 마지막 문장에 a+1 빼고 count 넣어도 됨.
+            document.querySelector('#target').innerHTML = a + 1;
+        }
+    </script>
+</body>
+</html>

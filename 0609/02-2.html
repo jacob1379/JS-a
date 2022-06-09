@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <script>
+        const ar = [];
+        let index = 0;
+        function cl() {
+            const fruit = document.querySelector('#fruit').value;
+            ar[index] =fruit;
+            console.log(index);
+            index++;
+            console.log(ar);
+        }
+    </script>
+</head>
+<body>
+    <select id="fruit">
+        <option>사과</option>
+        <option>바나나</option>
+        <option>수박</option>
+    </select>
+    <button onclick="cl();">추가</button>
+
+    <!-- 
+        선택한만큼 갯수가 추가됨 but 위의 onchange는 추가 안된다.
+        <select id="fruit">
+        <option>사과</option>
+        <option>바나나</option>
+        <option>수박</option>
+    </select>
+    <button onclick="add()">추가</button> 
+    -->
+
+</body>
+</html>

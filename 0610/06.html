@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>2항 연산자</h1>
+    <p>산술연산자 : + - * / %</p>
+    <!-- html entity : 특수문자 -->
+    <p>조건연산자 : > >= &lt; &lt;= == === != !==</p>
+    <p>논리연산자 : &&, ||</p>
+</body>
+<script>
+    const a = '5';
+    const b = 5;
+    // ==, != 는 타입을 고려하지 않고 비교
+    console.log(a==b);  //true
+    // ===, !=== 는 값과 타입을 모두 고려하여 비교
+    console.log(a===b);  //false
+
+    const p=null, q=null;
+    const x=undefined, y=undefined;
+    // undefined, null 은 비교가 가능하다.
+    console.log(p==q);
+    console.log(p===q);
+    console.log(x==y);
+    console.log(x===y);
+
+    // 객체를 비교할 때는 값을 비교하는 게 아니라 참조변수를 비교한다. 고로 객체는 비교불가능하다.(무조건 false)
+    const obj1 = {irum:'홍길동'};
+    const obj2 = {irum:'홍길동'};
+    console.log(obj1==obj2);  // false
+    console.log(obj1===obj2); // false
+
+    // NaN는 비교 불가능하다  -> isNaN()으로 비교할 수 있다.
+    const m = 'hello'*5;
+    console.log(m);
+    console.log(m === NaN);
+    console.log(m !== NaN);
+    console.log(isNaN(m));
+    console.log(isNaN(15));
+
+
+
+</script>
+</html>

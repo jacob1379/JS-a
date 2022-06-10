@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="vi()">
+    <!-- 
+        키-105가 적정체중이라 하자
+        적정체중을 출력하시오.
+     -->
+     <input type="text" placeholder="키를 입력하세요." id="ki">
+     <button onclick="aa()">확인</button>
+     <br>
+     <span>적정체중:</span>
+     <span id="result"></span>
+</body>
+<script>
+    function vi() {
+        document.querySelector('#result').innerHTML = 0;
+    }
+    function aa() {
+        const input = document.querySelector('#ki');
+        const x = parseInt(input.value);
+        input.value="";
+        input.focus();
+        const weight = x - 105;
+        document.querySelector('#result').innerHTML = weight;
+    }
+</script>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <!-- 
+        키와 체중을 입력받아 적정 체중 여부를 출력하시오
+        1. 입력 - input 2개
+        2. 처리 - 적정체중 계산 -> 적정범위는 0.9~1.1
+        3. 출력
+     -->
+    <div>
+        <span>키 : </span>
+        <label for="height"><input type="text" placeholder="키를 cm단위로 입력하시오." id="ki"></label>
+    </div>
+    <div>
+        <span>체중 : </span>
+        <label for="weight"><input type="text" placeholder="체중을 kg단위로 입력하시오." id="we"></label>
+    </div>
+    <button onclick="push();">적정 체중 확인</button>
+</body>
+<script>
+     function push() {
+         const height = document.querySelector('#ki');
+         const weight = document.querySelector('#we');
+         const h = parseInt(height.value);
+         const w = parseInt(weight.value);
+         const properWeight = h - 105;
+         // console.log(properWeight);
+         const min = properWeight * 0.9;
+         const max = properWeight * 1.1;
+         // console.log(min);
+         // console.log(max);
+         if(w>=min && w<=max) {
+             alert("적정 체중입니다.");
+         } else {
+             alert("적정 체중이 아닙니다.")
+         }
+     }
+</script>
+
+</html>

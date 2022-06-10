@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 
+    점수를 입력받아 배열에 추가해 출력하시오
+    -->
+    <input type="text" placeholder="점수를 입력하세요" id="jumsu">
+    <button onclick="ok()">확인</button>
+    <script>
+        const ar = [];
+        let index = 0;
+        // 함수 안에서 변수를 만들면 함수가 실행될 때마다 새로 만들어진다.
+        function ok() {
+        const input = document.querySelector('#jumsu')
+        ar[index] = parseInt(input.value);
+        input.value="";   // 입력된 값이 넘어가고 공백으로 바뀐다.
+        input.focus();    // 입력된 값을 확인 버튼으로 보내고 커서를 다시 입력창에 포커스함.
+        index++;
+        console.log(ar);
+        }
+    </script>
+</body>
+</html>
+

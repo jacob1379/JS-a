@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>이벤트</title>
+</head>
+
+<body>
+    <p id="target" onmouseenter="aaaa();">우리나라</p>
+    <script>
+        const p = document.querySelector("#target");
+        p.onclick = bbbb; // 객체에 포함된 함수 : 메소드
+        // html, Js 분업화를 위해 이 표기를 더 선호한다.
+
+        function aaaa() {
+            console.log("aaaa");
+        }
+        function bbbb() {
+            alert("bbbb");
+        }
+    </script>
+</body>
+
+</html>

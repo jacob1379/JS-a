@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script>
+        // 객체는 속성과 메소드. window 객체에 onload라는 메소드 추가
+        window.onload = function () {
+            bt.onclick = function () {
+                const num = parseInt(document.querySelector('#num').value);
+                const num1 = parseInt(document.querySelector('#num1').value);
+                const num2 = parseInt(document.querySelector('#num2').value);
+
+                const re1 = num % 2 === 0 ? '짝수입니다' : '홀수입니다'
+                const re2 = num * num;
+
+                document.querySelector('#num1').innerHTML = re1;
+                document.querySelector('#num2').innerHTML = re2;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    값 : <input type="text" id="num">
+    <button id="bt">계산</button><br>
+    짝수여부 : <span id="num1"></span><br>
+    제곱값 : <span id="num2"></span>
+</body>
+
+</html>

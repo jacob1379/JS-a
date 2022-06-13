@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+            bt.onclick = function () {
+                const kor = parseInt(document.querySelector('#kor').value);
+                const eng = parseInt(document.querySelector('#eng').value);
+                const result = kor >= 70 && eng >= 70 ? '통과' : '재시험';
+                alert(result);
+            }
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- 
+        국어 점수와 영어 점수를 입력받아 모두 70점 이상이면 통과, 아니면
+        재시험이라고 출력하시오.
+     -->
+    <label for="kor">국어</label>
+    <input type="text" placeholder="국어 점수 입력" id="kor">
+    <label for="eng">영어</label>
+    <input type="text" placeholder="영어 점수 입력" id="eng">
+    <button id="bt">결과 확인</button>
+</body>
+
+</html>

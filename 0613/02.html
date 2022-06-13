@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div>
+    <p id="target">우리나라</p>
+  </div>
+
+  <!-- 
+        마우스엔터, 클릭 두 이벤트 처리
+        엔터되면 배경색을 노랑, 클릭하면 글자색을 빨강색으로
+     -->
+  <script>
+    const p = document.querySelector("#target");
+
+    // 1번째 표현 방법
+    p.onmouseenter = bb;
+    function bb() {
+      p.style.backgroundColor = "yellow";
+    }
+    // 2번째 표현 방법
+    p.onclick = function aa() {
+      p.style.color = "red";
+    };
+    // 3번째 표현 방법 (이름을 생략해도 문제가 되지 않으면 js는 생략가능(익명 함수));
+    p.onclick = function () {
+      p.style.color = "red";
+    };
+  </script>
+</body>
+
+</html>

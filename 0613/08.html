@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+
+    <script>
+        // 장점 onload를 사용하면 js의 위치가 어디여도 상관없다
+        // 단 2번 이상 사용하면 덮어쓴다. 
+        window.onload = function () {
+            j.onclick = function () {
+                const value = document.querySelector('#value').value;
+                const input = parseInt(value);
+                const result = input % 2 === 0 ? '짝수입니다' : '짝수가 아닙니다'
+                alert(result);
+            }
+
+            document.querySelector('#h').onclick = function () {
+                const value = document.querySelector('#value').value;
+                const input = parseInt(value);
+                const result = input % 2 === 0 ? '홀수가 아닙니다' : '홀수입니다';
+                alert(result);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <input type="text" id="value">
+    <button id="j">짝수 판정</button>
+    <button id="h">홀수 판정</button>
+</body>
+
+</html>

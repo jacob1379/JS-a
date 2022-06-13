@@ -1,0 +1,27 @@
+<script>
+    // 여러 종류의 데이터로 하나의 정보를 구성 : 객체
+    // 어떤 정보가 여러개 : 배열
+    const ar = [3, 5, 7, 9];
+    for (let i = 0; i < 4; i++) {
+        //console.log(ar[i]);
+    }
+
+    const br = [55, 44, 7777, 55, 66, 33, 22];
+    for (let i = 0; i < br.length; i++) {
+        //console.log(br[i]);
+    }
+
+    // br의 요소가 하나씩 ob에 담긴다
+    for (const ob of br) {
+        //console.log(ob);
+    }
+
+    // of 반복문으로 cr의 합계를 sum에 담아 출력하시오
+    const cr = [1, 2, 3, 4, 5];
+    let sum = 0;
+    for (let i = 0; i < cr.length; i++) {
+        // sum = sum + cr;
+        sum += cr[i];
+    }
+    console.log(sum);
+</script>

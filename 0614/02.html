@@ -1,0 +1,19 @@
+<script>
+    // 국어와 영어의 합계를 출력하는 printTotal 메소드를 추가하시오.
+    const student = {
+        kor: 77,
+        eng: 80,
+
+        printTotal: function () {
+            console.log(this.kor + this.eng);
+        }
+    }
+    // 2번째 방법 (객체 밖에 표현)
+    student.insa = function () {
+        console.log(this.kor + this.eng)
+    };
+
+    student.printTotal();
+    student.insa();
+    // 객체 배열을 하려고 하는거임
+</script>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        // jquery는 js를 쉽게 작성할 수 있도록 해주는 기능들의 집합
+        // 라이브러리(기능의 집합) vs 프레임워크(사용법)
+        window.onload = function () {
+            const p1 = document.querySelector('#target');
+            p1.innerHTML = "우리나라 좋은나라";
+            p1.style.color = 'red';
+
+            // $ is not defined -> jQuery 안가져왔다
+            const p2 = $('#target2')
+            // 메소드 체이닝
+            p2.text('우리나라 좋은나라').css('color', 'blue')
+                .css('background-color', 'yellow').css('font-weight, bole');
+
+        }
+
+    </script>
+</head>
+
+<body>
+    <p id="target1"></p>
+    <p id="target2"></p>
+
+</body>
+
+</html>

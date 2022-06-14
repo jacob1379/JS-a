@@ -1,0 +1,20 @@
+<script>
+    const obj = {
+        irum: '홍길동',
+        func1: function () {
+            // 일반 함수
+            console.log("===========")
+            console.log(this);
+        }, // this = obj
+        func2: () => {
+            // 화살표 함수
+            console.log("##############")
+            console.log(this);
+            // this 값 없음. 자바스크립트의 this는 고정되어있지 않다. 자바는 고정
+        }
+    }
+
+    obj.func1();
+    obj.func2(); // window - 웹브라우저
+
+</script>

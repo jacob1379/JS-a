@@ -1,0 +1,27 @@
+<script>
+    // 이름, 국어, 영어 점수를 가지는 객체를 만드시오
+    // 아래와 같이 출력하는 함수를 만드시오.
+    // '홍길동의 평균점수는 85'
+
+    const obj = {  // 일반적인 형식의 값을 받을 때
+        irum: "홍길동",
+        kor: 85,
+        eng: 85,
+        jumsu: function () {
+            console.log(this.irum + '의 평균점수는' + (this.kor + this.eng) / 2 + '점');
+        }
+    }
+    obj.jumsu();
+
+    // 두가지 표현법 , 아래는 값을 모를때 입력받아야 할때 사용 , 업무용은 보통 정해져있는 값을 사용하니까 위에것을 많이 사용
+
+    const obj1 = {}; // 객체 밖에 표현 (가변적인 값을 받을 때)
+    obj1.irum = "홍길동"
+    obj1.kor = 75;
+    obj1.eng = 80;
+    obj1.jumsu = function () {
+        const avg = (this.kor + this) / 2.eng;
+        console.log(`${this.irum}의 평균점수는 ${avg}점`);
+    }
+
+</script>

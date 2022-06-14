@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 영어점수를 ul에 출력하시오. 80점 이상이면 빨강색으로 하시오.
+        // 영어점수의 합계를 div에 출력하시오.
+        // 영어점수의 합계 : 240점
+        const ar = [{ kor: 77, eng: 80 }, { kor: 75, eng: 70 }, { kor: 80, eng: 90 }];
+        window.onload = function () {
+            const ul = $('#ul')
+            const div = $('#div')
+            let sum = 0;
+
+            for (const i of ar) {
+                if (i.eng >= 80) {
+                    $(`<li>${i.eng}</li>`).appendTo(ul).css('color', 'red')
+                } else {
+                    $(`<li>${i.eng}</li>`).appendTo(ul);
+                }
+                sum += i.eng;
+            }
+            $(`<p>영어점수의 합계 : ${sum}점</p>`).appendTo(div);
+            // div.text(sum) 이렇게도 가능
+        }
+
+    </script>
+</head>
+
+<body>
+    <ul id="ul"></ul>
+    <div id="div"></div>
+</body>
+
+</html>

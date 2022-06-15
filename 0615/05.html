@@ -1,0 +1,32 @@
+<script>
+    const jumsu = 75;
+
+    // 문제) 점수를 입력받아 90점 이상이면 우수, 70점 이상이면 보통, 아니면 재시험 이라고 리턴
+
+    function 함수이름(jumsu) {
+        if (jumsu >= 90) {
+            return '우수'
+        } else if (jumsu >= 70) {
+            return '보통'
+        } else {
+            return '재시험'
+        }
+    }
+
+    console.log(함수이름(jumsu));
+
+    // 문제) 홀짝을 판정하는 함수를 정의하시오.
+
+    const x = 91;
+
+    function isEven(num) {
+        if (num % 2 === 0) {
+            return '짝수입니다';
+        } else {
+            return '홀수입니다'
+        }
+        // 삼항연산자 return num%2===0 ? 짝수 : 홀수 ;
+    }
+    console.log(isEven(x));
+
+</script>

@@ -1,0 +1,20 @@
+<script>
+    // 평균을 계산하는 함수를 정의하시오.
+    // 함수가 작업하는 데 필요한 모든 변수가 모든 변수는 함수가 가지고 있어야 한다.
+    // 함수의 입력은 여러개 가능하고 출력은 하나
+
+    const ar = [77, 66, 88, 99, 100];
+    const br = [25, 65, 77, 45];
+
+    function average(num) {
+        let sum = 0;
+        for (const i of num) {
+            sum += i;
+        }
+        const avg = sum / num.length;
+        return avg;
+    }
+    console.log(average(ar));
+    console.log(average(br));
+
+</script>

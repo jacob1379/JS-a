@@ -1,0 +1,18 @@
+<script>
+    //함수 - 독립
+    const kor = 70;
+    const eng = 75;
+    function add(kor, eng) {
+        // 함수는 복사본으로 작업한다.
+        return kor + eng
+    }
+
+    //객체 - 파라미터가 필요없음
+    const score = {
+        kor: 70,
+        eng: 75,
+        add: function () {
+            return this.kor + this.eng;
+        }
+    }
+</script>

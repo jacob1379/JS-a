@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 문제) 점수를 ul 안에 출력하는 함수를 만드시오.
+        const ar = [
+            { irum: '홍길동', jumsu: 80 }, { irum: '전우치', jumsu: 75 }
+        ];
+        window.onload = function () {
+            // jQuery로 선택한 객체는 자바스크립트 객체 + 양념
+
+            function printAr(arr) {
+                const ul = $('#ul')
+                for (const i of arr) {
+                    $(`<li>${i.jumsu}</li>`).appendTo(ul);
+                }
+            }
+            printAr(ar)
+        }
+        console.log($('#ul'))
+        console.log(document.querySelector('#ul'))
+        console.log(obj1);
+        console.log(obj2);
+        console.log($(obj2));
+    </script>
+</head>
+
+<body>
+    <ul id="ul"></ul>
+</body>
+
+</html>

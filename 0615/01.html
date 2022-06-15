@@ -1,0 +1,26 @@
+<script>
+    const a = 5;
+    const b = -10;
+    console.log(Math.abs(a)); //절대값, a의 값만 넣는다. 원본은 유지하고 복사본으로 작업하는 느낌
+    console.log(Math.abs(b));
+
+    // 객체 :  속성과 메소드의 집합
+    // 내장(built-in) 객체 : js가 기본 제공하는 객체
+    // Math 객체 : 수학 함수와 상수(ex. pi)를 모아놓은 객체
+
+    // 사용자가 넘기는 값을 저장하는 변수 : 매개변수(parameter)
+
+    function abs(x) {
+        if (x > 0) {
+            return x
+        } else if (x < 0) {
+            return -x
+        }
+    }
+    // 함수의 결과값 : 리턴값
+
+    console.log(abs(a));
+    console.log(abs(b));
+    console.log(abs(-10));
+    console.log(abs(5));
+</script>

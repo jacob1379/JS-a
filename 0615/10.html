@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+        // 홍길동의 점수는 80점, 전우치의 점수는 75점을 리스트에 입력
+        const ar = [
+            { irum: '홍길동', jumsu: 80 }, { irum: '전우치', jumsu: 75 }
+        ];
+        const br = [
+            { irum: '이종훈', jumsu: 70 }, { irum: '이보람', jumsu: 44 }
+        ];
+        const cr = [
+            { irum: '어수경', jumsu: 25 }, { irum: '정지소', jumsu: 75 }
+        ];
+        const dr = [
+            { irum: '조준형', jumsu: 72 }, { irum: '씨엘', jumsu: 33 }
+        ];
+        const er = [
+            { irum: '장규호', jumsu: 33 }, { irum: '제니', jumsu: 25 }
+        ];
+        const fr = [
+            { irum: '이보나', jumsu: 70 }, { irum: '박경림', jumsu: 75 }
+        ];
+        const gr = [
+            { irum: '강보배', jumsu: 44 }, { irum: '손예진', jumsu: 72 }
+        ];
+
+        window.onload = function () {
+            function score(num) {
+                const $list = $('#list'); // 앞에 달러사인 사용해서 JQuery객체임을 표시.
+                const $div = $('#div');
+                let sum = 0;
+                for (const i of num) {
+                    $(`<li>${i.irum}의 점수는 ${i.jumsu}점</li>`).appendTo($list);
+                    sum += i.jumsu
+                }
+                $(`<p>점수합계 : ${sum}</p>`).appendTo($div);
+            }
+            score(ar);
+            score(br);
+            score(cr);
+            score(dr);
+            score(er);
+            score(fr);
+            score(gr);
+        }
+    </script>
+</head>
+
+<body>
+    <ul id="list"></ul>
+    <div id="div"></div>
+</body>
+
+</html>

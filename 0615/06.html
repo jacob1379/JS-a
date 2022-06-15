@@ -1,0 +1,20 @@
+<script>
+    const ar = [77, 55, 66, 88];
+    const br = [55, 33, 22];
+
+
+    // ar 상수에 해당하는 값만 출력가능 다른곳에 사용못함
+    for (const value of ar) {
+        console.log(value);
+    }
+    // 어떤 값을 넣어도 사용가능 (함수를 써서 재사용이 가능하게 한다.)
+
+    function 배열(arr) {
+        for (const value of arr) {
+            console.log(value);
+        }
+    }
+
+    배열(ar);
+    배열(br);
+</script>

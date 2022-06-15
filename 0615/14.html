@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <style>
+        #total {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            background-color: black;
+        }
+
+        #page {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #page2 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #page3 {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .parent {
+            border: 3px solid orange;
+            width: 300px;
+            border-radius: 20px;
+            background-color: burlywood;
+        }
+
+        .parent2 {
+            display: flex;
+            justify-content: center;
+        }
+
+        .photo {
+            width: 100px;
+        }
+
+        .name {
+            display: flex;
+            justify-content: center;
+        }
+
+        .tel {
+            display: flex;
+            justify-content: center;
+        }
+
+        .address {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+
+    <script>
+        const url = 'http://sample.bmaster.kro.kr/contacts?pageno=5&pagesize=4'
+        const url2 = 'http://sample.bmaster.kro.kr/contacts?pageno=4&pagesize=4'
+        const url3 = 'http://sample.bmaster.kro.kr/contacts?pageno=3&pagesize=4'
+        window.onload = function () {
+            $.ajax(url).done(function (response) {
+                const contacts = response.contacts;
+                const $page = $('#page')
+                for (c of contacts) {
+                    const $div = $('<div class="parent">').appendTo($page);
+                    $('<div class="name">').text(c.name).appendTo($div);
+                    const $div2 = $('<div class="parent2">').appendTo($div);
+                    $('<img class="photo">').attr('src', c.photo).appendTo($div2);
+
+                    $('<div class="tel">').text(c.tel).appendTo($div);
+                    $('<div class="address">').text(c.address).appendTo($div);
+                }
+            })
+
+            $.ajax(url2).done(function (response) {
+                const contacts = response.contacts;
+                const $page2 = $('#page2')
+                for (c of contacts) {
+                    const $div = $('<div class="parent">').appendTo($page2);
+                    $('<div class="name">').text(c.name).appendTo($div);
+                    const $div2 = $('<div class="parent2">').appendTo($div);
+                    $('<img class="photo">').attr('src', c.photo).appendTo($div2);
+
+                    $('<div class="tel">').text(c.tel).appendTo($div);
+                    $('<div class="address">').text(c.address).appendTo($div);
+                }
+            })
+
+            $.ajax(url3).done(function (response) {
+                const contacts = response.contacts;
+                const $page3 = $('#page3')
+                for (c of contacts) {
+                    const $div = $('<div class="parent">').appendTo($page3);
+                    $('<div class="name">').text(c.name).appendTo($div);
+                    const $div2 = $('<div class="parent2">').appendTo($div);
+                    $('<img class="photo">').attr('src', c.photo).appendTo($div2);
+
+                    $('<div class="tel">').text(c.tel).appendTo($div);
+                    $('<div class="address">').text(c.address).appendTo($div);
+                }
+            })
+
+        }
+    </script>
+</head>
+
+<body id="total">
+    <div id="page">
+
+    </div>
+    <div id="page2">
+
+    </div>
+    <div id="page3">
+
+    </div>
+
+</body>
+
+</html>

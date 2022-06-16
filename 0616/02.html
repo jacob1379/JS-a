@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            text-align: center;
+        }
+
+        /* 
+        static :  요소들의 기본 position 속성
+        relative : 현재 위치기준으로 이동 (left : 300햇을 때 어디?)
+                    빈 공간은 유지(레이아웃이 유지)
+        absolute : 부모 기준으로 이동
+                    부모는 relative 또는 absolute
+                    해당 부모를 더 이상 기준으로 찾지 못할 때 브라우저를 기준으로 한다.
+        부모 relative, 자식 absolute로 이동시키는 경우가 많다.
+        */
+
+        #target1 {
+            position: relative;
+            left: 300px;
+        }
+
+        #target2 {
+            position: absolute;
+            left: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="border : 1px solid red">A</div>
+    <div style="border : 1px solid green" id="target1">B</div>
+    <div style="border : 1px solid blue;">C</div>
+    <div style="border : 1px solid violet" id="target2">D</div>
+    <div style="border : 1px solid pink">E</div>
+</body>
+
+</html>

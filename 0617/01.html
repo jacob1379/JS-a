@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>비동기 작업</title>
+    <script>
+        function a() { console.log('a') }
+        function b() { console.log('b') }
+        function c() { console.log('c') }
+        function sync() {
+            // 함수는 하나씩 순서대로 실행 -> 동기(synchrounous)
+            a();
+            b();
+            c();
+        }
+        function async() {
+            $.ajax("http://sample.bmaster.kro.kr/contacts?pageno=2").done(function () { a(); b(); c(); });
+        }  // b,c를 done 안으로 넣어야 순서대로 작동
+        $.ajax
+    </script>
+</head>
+
+<body>
+    <button onclick="sync()">동기 작업</button>
+    <button onclick="async()">비동기 작업</button>
+</body>
+
+</html>

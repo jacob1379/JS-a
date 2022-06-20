@@ -18,7 +18,7 @@
         function async() {
             $.ajax("http://sample.bmaster.kro.kr/contacts?pageno=2").done(function () { a(); b(); c(); });
         }  // b,c를 done 안으로 넣어야 순서대로 작동
-        $.ajax
+        await $.ajax() //사용
     </script>
 </head>
 

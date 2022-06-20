@@ -71,6 +71,8 @@
                 $('<button class="btn btn-primary">')
                     .attr('data-cno', i).text(cities[i].name)
                     .appendTo($buttons)
+
+                // 요소에 값을 저장할 때는 data- 속성을 사용한다.
             }
         }
         function printWeather() {
@@ -86,10 +88,10 @@
             printWeather();
 
             $('#buttons button').click(async function () {
-                cno = parseInt($(this).attr('data-cno'));
-                url = `https://api.openweathermap.org/data/2.5/weather?q=${cities[cno].code}&appid=${key}&units=metric`;
-                weather = await $.ajax(url);
-                printWeather();
+                cno = parseInt($(this).attr('data-cno')); // 선택자 느낌
+                url = `https://api.openweathermap.org/data/2.5/weather?q=${cities[cno].code}&appid=${key}&units=metric`; //api 연결
+                weather = await $.ajax(url); // 날씨의 데이터를 가져와서
+                printWeather(); // 출력
             });
         });
     </script>
@@ -105,7 +107,6 @@
             <div id="cloud">scattere clouds</div>
         </div>
         <div id="buttons" class="btn-group">
-            <!-- 요소에 값을 저장할 때는 data- 속성을 사용한다. -->
         </div>
     </div>
 </body>

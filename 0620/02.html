@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+
+    <script>
+        let 위도, 경도;
+        const key = 'f0b9abc4dd65ee7c4c88caeb205925c0';
+
+        async function getPosition() {
+            // const url = `https://api.openweathermap.org/data/2.5/weather?q={Incheon}&appid=${key}`
+            const url = `http://api.openweathermap.org/geo/1.0/direct?q=Incheon&limit=5&appid=${key}&units=metric`
+
+            const result = await $.ajax(url);  // 병렬실행, 작업이 동시에 진행되게끔
+            위도 = result[0].lat;
+            경도 = result[0].lon;
+        }
+        function getFormatDate(date) {
+            // 날짜를 '6월20일'
+            return `${date.getMonth() + 1}월${date.getDate()}일`;
+        }
+        function getFormatTime(date) {
+            return `${date.getHours()}:${date.getMinutes()}`;
+            // 시간을 '07:20'
+        }
+
+        async function getWeather() {
+            const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${위도}&lon=${경도}&appid=${key}&units=metric`
+            const result = await $.ajax(url);
+            const 일출 = new Date(result.current.sunrise * 1000);
+            const 일몰 = new Date(result.current.sunrise * 1000);
+            const 온도 = result.current.temp;
+            const 습도 = result.current.humidity;
+            //온도, 습도 출력
+            /*
+            날씨 = {
+                '일출':일출,
+                '일몰':일몰,
+                '온도':온도,
+                '습도':습도
+            }
+            */
+            // ES6 구조분해할당 :  이름과 값을 가진 변수가 똑같은 경우 한번만 적음 (변수를 만들어 놓아야함)
+            const 날씨 = { 일출, 일몰, 온도, 습도 };
+            console.log(날씨);
+        }
+        function test1() {
+            // 구조분해할당
+            const { 일출, 일몰, 온도, 이름 = '홍길동' } = 날씨;
+            console.log(이름);
+            console.log(일출);
+            console.log(온도);
+        }
+        function test2(일출, 일몰, 온도, 이름 = '홍길동') {
+            console.log(이름);
+        }
+        console.log(일출, 일몰);
+        $(document).ready(async function () {
+            await getPosition();   // await을 넣지 않으면 아래 콘솔이 먼저 실행된다.
+            await getWeather();
+            // 서버 상태를 숫자로 표시
+            // 401: 권한없음, 400: 수신거부, 404: 주소없음
+
+
+            // 현재온도, 최고, 최저, 습도, 날씨, 구름낀정도, 자외선, 일출, 일몰;
+
+            //일출시간, 일몰시간 - UTC 표시를 지역 시간으로 바꾸자
+            //console.log(result.current.sunrise);
+            // js 내장객체 Date -> new를 사용 (그때 그때 값이 다른 경우)
+
+            // console.log(sunrise.getFullYear());
+            // console.log(sunrise.getMonth() + 1); //정해진 약속
+            // console.log(sunrise.getDate());
+            // console.log(sunrise.getDay());
+            // console.log(sunrise.getHours());
+            // console.log(sunrise.getMinutes());
+
+
+        })
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

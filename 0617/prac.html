@@ -46,40 +46,7 @@
     </style>
 
     <script>
-        const key = 'f0b9abc4dd65ee7c4c88caeb205925c0';
-        const cities = [
-            { name: '인천', code: 'Incheon' }, { name: '서울', code: 'Seoul' }, { name: '도쿄', code: 'Tokyo' }, { name: '뉴욕', code: 'New York' }
-        ];
-        let cno = 0;
-        let weather = null;
-        let url = `https://api.openweathermap.org/data/2.5/weather?q=${cities[cno].code}&appid=${key}&units=metric`
 
-        function init() {
-            const $buttons = $('#buttons');
-            for (let i = 0; i < cities.length; i++) {
-                $('<button class="btn btn-primary">').attr('data-cno', i).text(cities[i].name)
-                    .appendTo($buttons);
-            }
-        }
-
-        function printWeather() {
-            $('#name').text(weather.name);
-            $('#temp').text(`온도:${weather.main.temp}도/습도:${weather.main.humidity}%`);
-            $('#cloud').text(weather.weather[0].desciption);
-        }
-
-        $(document).ready(async function () {
-            init()
-            weather = await $.ajax(url);
-            printWeather();
-
-            $('#buttons button').click(async function () {
-                cno = parseInt($(this).attr('data-cno'));
-                url = `https://api.openweathermap.org/data/2.5/weather?q=${cities[cno].code}&appid=${key}&units=metric`;
-                weather = await $.ajax(url);
-                printWeather();
-            })
-        })
     </script>
 
 </head>

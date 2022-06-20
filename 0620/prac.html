@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+
+    <script>
+        "use strict"
+
+        const key = 'f0b9abc4dd65ee7c4c88caeb205925c0';
+
+        let 좌표 = null;
+        let 날씨 = null;
+        let 먼지 = null;
+
+        async function getPosition() {
+            let url = `http://api.openweathermap.org/geo/1.0/direct?q=Incheon&limit=5&appid=${key}`
+            const result = await $.ajax(url);
+            const 위도 = result[0].lat;
+            const 경도 = result[0].lon;
+            좌표 = { 위도, 경도 };
+            console.log(result);
+        }
+
+        function getFormatDate(date) {
+            return `${date.getMonth() + 1}월 ${date.getDate()}일`
+        }
+
+        function getFormatTime(date) {
+            return `${date.getHours()}:${date.getMinutes()}`
+        }
+
+        async function getWeather() {
+            const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${좌표.위도}&lon=${좌표.경도}&appid=${key}`
+            const result = await $.ajax(url);
+            const 일출 = new Date(result.current.sunrise * 1000);
+            const 일몰 = new Date(result.current.sunset * 1000);
+            const 온도 = result.current.temp;
+            const 습도 = result.current.humidity;
+            const 체감 = result.daily[0].feels_like.day;
+            const 자외선 = result.current.uvi;
+            let 예보 = [];
+            for (let i = 1; i <= 7; i++) {
+                const 상태 = result.daily[i].weather[0].main;
+                const 최고 = result.daily[i].temp.max;
+                const 최저 = result.daily[i].temp.min;
+                예보[i - 1] = { 상태, 최고, 최저 };
+            }
+            날씨 = { 일출, 일몰, 온도, 습도, 체감, 자외선, 예보 };
+        }
+        async function getPollution() {
+            const url = `http://api.openweathermap.org/data/2.5/air_pollution?lat=${좌표.위도}&lon=${좌표.경도}&appid=${key}`
+            const result = await $.ajax(url)
+            const 미세먼지 = result.list[0].components.pm10
+            const 초미세먼지 = result.list[0].components.pm2_5
+
+            먼지 = { 미세먼지, 초미세먼지 };
+        }
+
+        $(document).ready(async function () {
+            await getPosition();
+            await getWeather();
+            await getPollution();
+
+            const total = { 좌표, 날씨, 먼지 }
+            console.log(total);
+
+        })
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<!-- const url = `https://api.openweathermap.org/data/2.5/onecall?lat=${좌표.위도}&lon=${좌표.경도}&appid=${key}` -->

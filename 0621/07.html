@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>서버로 값을 넘기기</title>
+    <script>
+        async function aaa() {
+            // sample.bmaster에서 pageno는 3, pagesize는 10으로 요청
+            // urlencoded 형식
+            // 주소?pageno=3&pagesize=10
+
+            const url = 'http://sample.bmaster.kro.kr/contacts';
+            // urlencoded 형식이 주소창에 찍힌 것을 querystring
+            const querystring = 'pageno=3&pagesize=10';
+
+            // $.ajax를 보낼 때 querystring을 포함한 주소라면 간단히 적을 수 있다
+            // $.ajax(`${url}?${querystring}`) 간단
+
+            const result = await $.ajax({ url: url, data: querystring });//원래
+            console.log(result);
+
+            // $.ajax는 js 객체를 urlencoded로 자동 변환한다.
+            const obj = { pageno: 3, pagesize: 10 }
+            const result2 = await $.ajax({ url: url, data: obj });
+            console.log(result2);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

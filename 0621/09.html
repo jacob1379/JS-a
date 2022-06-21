@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>작업순서</title>
+    <script>
+        // 1. api를 찾아서 key를 발급받자.
+        // 2. 인천의 위도와 경도를 찾자
+        // 3. 현재 날씨, 날씨 예보, 미세/초미세 정보를 가져오자
+        // 4. 정보들을 파싱(parsing)해서 날씨 객체를 생성하자
+        $(document).ready(async function () {
+            const key = 'f0b9abc4dd65ee7c4c88caeb205925c0';
+            const position = 'https://api.openweathermap.org/geo/1.0/direct';
+            const airPollution = 'https://api.openweathermap.org/data/2.5/air_pollution';
+            const weather = 'https://api.openweathermap.org/data/2.5/onecall';
+
+            const positionParam = {
+                q: 'Incheon',
+                limit: 1,
+                appid: key
+            }
+            const result = await $.ajax({
+                url: position,
+                data: positionParam,
+                // 요청 방식 : get, post, put, patch, delete
+                method: 'get', // 메소드 프로세스 생략 가능
+                // 객체를 urlencoded로 자동변환할 것인가?
+                processData: true
+            })
+            console.log(result)
+            console.log(`위도:${result[0].lat} , 경도:${result[0].lon}`);
+        })
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+    <script>
+        // ES6에서 {}는 스코프를 생성한다.
+        // 변수는 중괄호 소속이다. (scope)
+
+        let data = 10; // 어디서나 사용가능 -> 전역 (global)
+
+        function es6() {
+            let a = 20;
+            {
+                // b는 중괄호가 스코프
+                let b = 30;
+                console.log(data, a, b);
+            }
+            console.log(data, a, b);
+        }
+        es6();
+
+        // ES5 에서는 함수만이 스코프를 생성한다.
+        function es5() {
+            var a = 20;
+            {
+                let b = 30;
+                console.log(data, a, b);
+            }
+            console.log(data, a, b);
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

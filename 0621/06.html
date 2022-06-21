@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>중--------------요</title>
+    <script>
+        // 5명의 회원 데이터 출력
+        async function getApiData() {
+            const url = 'http://sample.bmaster.kro.kr/contacts?pageno=1'
+            // 비동기 작업 - 병렬로 동시에 실행되는 작업들
+            const result = await $.ajax(url);
+            return result
+        }
+
+        function printApiData({ contacts }) {
+            const $tbody = $('#list');
+
+            for (const c of contacts) {
+                const $tr = $('<tr>').appendTo($tbody);
+                $('<td>').text(c.name).appendTo($tr);
+                $('<td>').text(c.tel).appendTo($tr);
+                $('<td>').text(c.address).appendTo($tr);
+            }
+        }
+        $(document).ready(async function () {
+            let data = await getApiData();
+            printApiData(data);
+
+            $('#print').click(function () {
+                printApiData(data);
+            })
+            // 이벤트 이름 함수를 사용하면 정적인 요소의 이벤트만 처리가능
+            $('td').click(function () {
+                alert('클릭했어요')
+            })
+
+            // 동적으로 추가된 요소의 이벤트를 처리하려면
+            // $(넓은 선택자).on('이벤트이름', 선택자, 함수)
+            $('#list').on('click', 'td', function () {
+                alert('동적요소도 처리합니다.')
+            })
+        }) 
+    </script>
+</head>
+
+<body>
+    <button id="print">출력</button>
+    <table>
+        <tbody id="list">
+
+        </tbody>
+    </table>
+</body>
+
+</html>

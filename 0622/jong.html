@@ -59,6 +59,7 @@
             const humidity = result3.current.humidity;
             const sunrise1 = new Date(result3.current.sunrise * 1000);
             const sunset1 = new Date(result3.current.sunset * 1000);
+            
             const sunrise = `${sunrise1.getHours()}시 ${sunrise1.getMinutes()}분`;
             const sunset = `${sunset1.getHours()}시 ${sunset1.getMinutes()}분`;
             const uvi = result3.current.uvi;

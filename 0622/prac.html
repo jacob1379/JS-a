@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+    // 도시배열을 만들고 버튼으로 출력
+    // 도시 선택하면 위도와 경도를 얻어오기
+    // 날씨와 공기정보 얻어와서 객체생성 후 출력
+    const key = 'f0b9abc4dd65ee7c4c88caeb205925c0'
+    const positionUrl = 'http://api.openweathermap.org/geo/1.0/direct'
+    const weatherUrl = 'https://api.openweathermap.org/data/2.5/onecall'
+    const airUrl = 'http://api.openweathermap.org/data/2.5/air_pollution'
+    const limit = 1; // 요거 의미
+    const cities = [{name:'서울', code:'Seoul'}, {name:'대구', code:'Daegu'}, {name:'인천', code:'Incheon'}];
+    let cno = 0;
+
+    function init() {
+        const $buttons = $('#buttons')
+        for(let i =0; i < cities.length; i++){
+            $('<button>').attr('data-num', i).text(cities[i].name).appendTo($buttons);
+        }
+    }
+
+    async function getAllData(key,positionUrl,weatherUrl,airUrl,limit,cno) {
+        const result= await $.ajax({
+            url : positionUrl,
+            data : {q : cities[cno].code, appid : key}
+        })
+        console.log(result)
+        const lat = result[0].lat;
+        const lon = result[0].lon;
+
+        const result2 = await $.ajax({
+            url : weatherUrl,
+            data : {lat:lat, lon:lon, appid : key, units : 'metric'}
+        })
+        console.log(result2)
+        const result3 = await $.ajax({
+            url : airUrl,
+            data : {lat:lat, lon:lon, appid:key}
+        });
+        console.log(result3)
+
+        const clouds = result2.current.clouds;
+        const feels_temp = `${result2.current.feels_like}도`;
+        const humidity = `${result2.current.humidity}%`;
+        const sunrise1 = new Date(result2.current.sunrise*1000);
+        const sunset1 = new Date(result2.current.sunset*1000);
+        const sunrise = `${sunrise1.getHours()}시${sunrise1.getMinutes()}분`
+        const sunset = `${sunset1.getHours()}시${sunset1.getMinutes()}분`
+        const temp = `${result2.current.temp}도`;
+        const uvi = result2.current.uvi;
+        const weather = result2.current.weather[0].main;
+        const pm10 = result3.list[0].components.pm10;
+        const pm2_5 = result3.list[0].components.pm2_5;
+        console.log(pm2_5);
+        return {clouds, feels_temp, humidity, sunrise, sunset, temp, uvi, weather, pm10, pm2_5}
+    }
+
+    function getPrint(cities, cno, clouds, feels_temp, humidity, sunrise, sunset, temp, uvi, weather, pm10, pm2_5) {
+        $('#city').text(cities[cno].name)
+        $('#todayclouds').text(clouds);
+        $('#todayfeels').text(feels_temp);
+        $('#todayhumid').text(humidity);
+        $('#todayrise').text(sunrise);
+        $('#todayset').text(sunset);
+        $('#todaytemp').text(temp);
+        $('#todayuvi').text(uvi);
+        $('#todayweather').text(weather);
+        $('#todaypm10').text(pm10);
+        $('#todaypm2_5').text(pm2_5);
+    }
+
+    $(document).ready(async function() {
+        init();
+        const data = await getAllData(key,positionUrl,weatherUrl,airUrl,limit,cno);
+        getPrint(cities, cno, data.clouds, data.feels_temp, data.humidity, data.sunrise, data.sunset, data.temp, data.uvi, data.weather, data.pm10, data.pm2_5);
+        
+        $('button').click(async function() {
+            let cno = parseInt($(this).attr('data-num'));
+            const data = await getAllData(key,positionUrl,weatherUrl,airUrl,limit,cno);
+            getPrint(cities, cno, data.clouds, data.feels_temp, data.humidity, data.sunrise, data.sunset, data.temp, data.uvi, data.weather, data.pm10, data.pm2_5);
+        })
+    }) // 여기 설명
+
+    </script>
+</head>
+<body>
+    <div id="buttons"></div>
+    <div><span id="city"></span></div>
+    <div>
+    <div>오늘 구름량 : <span id="todayclouds"></span></div>
+    <div>오늘 체감온도 : <span id="todayfeels"></span></div>
+    <div>오늘 습도 : <span id="todayhumid"></span></div>
+    <div>오늘 일출시간 : <span id="todayrise"></span></div>
+    <div>오늘 일몰시간 : <span id="todayset"></span></div>
+    <div>오늘 실제온도 : <span id="todaytemp"></span></div>
+    <div>오늘 자외선 : <span id="todayuvi"></span></div>
+    <div>오늘 날씨 : <span id="todayweather"></span></div>
+    <div>오늘 미세먼지 : <span id="todaypm10"></span></div>
+    <div>오늘 초미세먼지 : <span id="todaypm2_5"></span></div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>this</title>
+
+    <script>
+        // 메소드 만드는 방법
+        // 일반 함수와 화살표 함수의 차이점.
+        const obj1 = {
+            irum: "홍길동",
+            kor: 70,
+            eng: 80,
+            tot: 0,
+            print: function () {
+                console.log(this.irum);
+            },
+            setTot: function () {
+                this.tot = this.kor + this.eng;
+            }
+            // 이름을 출력하는 print 메소드 추가
+        }
+
+        // ES6의 메소드 작성법
+        const obj2 = {
+            irum: "홍길동",
+            kor: 70,
+            eng: 80,
+            tot: 0,
+            print() {
+                console.log(this.irum);
+            },
+            setTot() {
+                this.tot = this.kor + this.eng
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

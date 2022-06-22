@@ -1,0 +1,27 @@
+<script>
+
+    console.log(this);          // 전역(global) this는 window 객체
+
+    // 함수와 화살표 함수는 this가 다르다
+    const obj = {
+        kor: 70,
+        printThis() {
+            // 메소드의 this는 소속된 객체를 가리켜야 한다.
+            // 일반 함수의 this는 소속된 객체
+            console.log(this);
+        }
+    }
+
+    const obj2 = {
+        kor: 70,
+        // 화살표 함수의 this는 window다
+        // 화살표 함수로는 메소드를 만들 수 없다.
+        printThis: () => {
+            console.log(this);  // undefined
+        }  // 메소드로 동작하지 않음 사용하지 말자
+    }
+
+    console.log(obj.printThis());
+    console.log(obj2.printThis());
+
+</script>

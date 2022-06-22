@@ -1,0 +1,39 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    // this
+    function aaa() {
+        // 1. 함수에서는 window 객체다.
+        console.log(this);  // window
+    }
+
+    function bbb() {
+        console.log("1." + this);
+        const param = {
+            pageno: 1,
+            test() { console.log(this); }
+        }
+
+        // 전통적 $.ajax
+
+        $.ajax({
+            url: 'http://sample.bmaster.kro.kr/contacts',
+            data: param,
+            success: function (result) {
+                console.log("2." + this);
+            } // 성공했을 때의 함수
+        })
+        // 위 $.ajax의 개량 -> await(ES2018인가 추가)
+        $.ajax('http://sample.bmaster.kro.kr/contacts')
+            .done(function (result) { console.log("3." + this) });
+    }
+
+    // js 함수의 this는 window다
+    // 그런데 일반함수의 this는 동적이다(바뀔 수 있다)!!!
+    // 일반함수를 단독으로 사용하면 window, 메소드로 사용하면 객체,
+    // "이벤트 핸들러로 사용하면 이벤트가 발생한 곳"  ex) 버튼을 누르면 그 버튼
+    // 화살표 함수의 this는 정적이다 (한 번 만들어지면 바뀌지 않음)
+    // js 의 this는 확인해봐야함!!!
+
+    aaa();
+    bbb();
+</script>

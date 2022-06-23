@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const init = (cities) => {
+            const $button = $('#buttons');
+            cities.forEach((city, index) => $('<button>').text(city.name).attr('data-no', index).appendTo($button)
+            )
+        }
+        // http 상태코드
+        // 200 : 성공
+        // 400 : 수신 거부
+        // 401 : 인증되지 않음(너가 누군지 몰라. unauthorize), 키가 틀림
+        // 403 : 권한없음 (인증은했음)
+        // 404 : not found (주소없음)
+        // 500 : 서버 오류
+
+        const getPosition = async (city, key, url) => {
+            // 요청 파라미터 : ?q=도시이름&appid=api키;
+            // $.ajax는 요청 파라미터를 객체로 만들어 놓으면 자동으로 urlunloded 변환
+            const params = { q: city, appid: key }
+            const result = await $.ajax({ url: url, data: params })
+            // $.ajax에 await안걸고 결과를 출력하면 Promise 객체
+            // Promise 객체는 비동기 작업의 결과를 의미하는 객체 (성공? 실패?...)
+            console.log(result);
+            console.log(result[0].lat, result[0].lon);
+            // 위도 경도를 ready 핸들러로 돌려보내 저장하자 return
+            return { 위도: result[0].lat, 경도: result[0].lon };
+        }
+
+        $(document).ready(async function () {
+
+            const key = "f0b9abc4dd65ee7c4c88caeb205925c0";
+
+            const positionUrl = `https://api.openweathermap.org/geo/1.0/direct`;
+            const airUrl = `https://api.openweathermap.org/data/2.5/air_pollution`;
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/onecall`;
+
+            const cities = [{ name: '인천', code: 'Incheon' }, { name: '도쿄', code: 'Tokyo' }, { name: '하노이', code: 'Ha Noi' }, { name: '방콕', code: 'bangkok' }];
+            let cno = 0;
+
+            init(cities);
+            let position = await getPosition(cities[cno].code, key, positionUrl);
+            console.log(position)
+
+            $('button').click(async function () {
+                // 1. 이벤트 핸들러에서 this를 이용하면 이벤트가 발생한 요소에 접근할 수 있다
+                // 2. 화살표 함수와 일반 함수의 차이
+                // - 일반 함수의 this는 상황에 따라 바뀐다 : 객체의 메소드라면 객체가 this, 이벤트 핸들러라면 이벤트 소스가 this
+                // - 화살표 함수의 this는 window 객체
+                // - 따라서 이벤트 핸들러에서 this가 필요한 경우 화살표 함수를 사용하면 안된다
+                let cno = parseInt($(this).attr('data-no'))
+                console.log(cities[cno].name);
+                position = await getPosition(cities[cno].code, key, positionUrl);
+                console.log(position)
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="weather"></div>
+        <div id="buttons"></div>
+    </div>
+</body>
+
+</html>

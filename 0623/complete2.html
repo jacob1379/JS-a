@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
+
+    <style>
+        .safe {
+            color: green;
+        }
+
+        .common {
+            color: orange;
+        }
+
+        .warn {
+            color: red;
+        }
+    </style>
+    <script>
+        const init = (cities) => {
+            const $button = ('#buttons')
+            cities.forEach((cities, index) => $('<button>').attr('data-no', index).text(cities.name).appendTo($button));
+        }
+
+        const getPosition = async (url, cities, cno, key) => {
+            const params = { q: cities[cno].code, appid: key }
+            const result = await $.ajax({ url: url, data: params })
+            return { lat: result[0].lat, lon: result[0].lon };
+        }
+
+        const getWeather = async (url, position, key) => {
+            const params = { lat: position.lat, lon: position.lon, appid: key, units: 'metric' }
+            const result = await $.ajax({ url: url, data: params });
+            return {
+                temp: result.current.temp,
+                uvi: result.current.uvi,
+                weather: result.current.weather[0].main
+            }
+        }
+
+        const getAir = async (url, position, key) => {
+            const params = { lat: position.lat, lon: position.lon, appid: key }
+            const result = await $.ajax({ url: url, data: params })
+            return {
+                pm10: result.list[0].components.pm10
+            }
+        }
+
+        const onPrint = (position, weather, air, cities, cno) => {
+            const $info = $('#weather');
+            $info.empty(); // 다시 생성되는걸 비워주고 다시 만듬
+
+            $('<div>').text(`${cities[cno].name} (위도: ${position.lat}, 경도: ${position.lon})`).appendTo($info);
+
+            let icon = undefined;
+
+            if (weather.weather === 'Rain') {
+                icon = `<i class='fas fa-cloud-showers-heavy'></i>`
+            } else if (weather.weather === 'Sun') {
+                icon = `<i class='fas fa-sun'></i>`
+            } else { icon = `<i class='fas fa-cloud-sun'></i>` };
+
+            $('<div>').html(icon).appendTo($info);
+
+            $('<div>').text(`온도: ${weather.temp}도`).appendTo($info);
+
+            const uvi = $('<div>').text(`자외선: ${weather.uvi}`).appendTo($info);
+            if (weather.uvi < 3) {
+                uvi.attr('class', 'safe');
+            } else if (weather.uvi < 9) {
+                uvi.attr('class', 'common');
+            } else {
+                uvi.attr('class', 'warn');
+            }
+
+            const pm10 = $('<div>').text(`미세먼지: ${air.pm10}`).appendTo($info);
+            if (air.pm10 < 30) {
+                pm10.attr('class', 'safe')
+            } else if (air.pm10 < 90) {
+                pm10.attr('class', 'common')
+            } else {
+                pm10.attr('class', 'warn')
+            }
+        }
+
+        $(document).ready(async function () {
+            const key = "f0b9abc4dd65ee7c4c88caeb205925c0";
+
+            const positionUrl = `https://api.openweathermap.org/geo/1.0/direct`;
+            const airUrl = `https://api.openweathermap.org/data/2.5/air_pollution`;
+            const weatherUrl = `https://api.openweathermap.org/data/2.5/onecall`;
+
+            const cities = [{ name: '인천', code: 'Incheon' }, { name: '도쿄', code: 'Tokyo' }, { name: '하노이', code: 'Ha Noi' }, { name: '방콕', code: 'Bangkok' }];
+            let cno = 0;
+
+            init(cities);
+            let position = await getPosition(positionUrl, cities, cno, key);
+            let weather = await getWeather(weatherUrl, position, key);
+            let air = await getAir(airUrl, position, key);
+            onPrint(position, weather, air, cities, cno);
+
+            $('button').click(async function () {
+                let cno = parseInt($(this).attr('data-no'))
+                position = await getPosition(positionUrl, cities, cno, key);
+                weather = await getWeather(weatherUrl, position, key);
+                air = await getAir(airUrl, position, key);
+                onPrint(position, weather, air, cities, cno);
+                console.log(this)
+            })
+        })
+
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <div id="weather"></div>
+        <div id="buttons"></div>
+    </div>
+</body>
+
+</html>

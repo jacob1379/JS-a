@@ -44,6 +44,19 @@
         }
     </style>
     <script>
+        
+        // 작업 순서
+        // 1. 도시 목록을 배열 객체로 만든다
+        // 2. 도시 목록을 document 객체에 출력
+        // 3. 출력된 도시 목록에 대한 click 이벤트 콜백 동작 확인
+        // 4. 선택한 도시를 이용해 위도, 경도를 얻어오는 메소드 추가
+        // 5. 위도와 경도를 리턴해 ready 이벤트 핸들러에 저장한다
+        // 6. 위도와 경도를 가지고 날씨와 공기 정보를 얻어오는 메소드 추가
+        // 7. 날씨와 공기 정보 중 원하는 정보를 파싱해 리턴해 ready 이벤트 핸들러에 저장한다
+        // 8. 날씨와 공기 정보를 document 객체에 출력
+        // 9. 날씨 정보를 font-awesome 아이콘으로 표시
+        // 10. 자외선 지수와 미세먼지 지수에 css 스타일 적용
+
         const init = (cities) => {
             const $button = $('#buttons')
             cities.forEach((city, index) => $('<button class="btn btn-primary">').attr('data-no', index).text(city.name).appendTo($button))
@@ -58,17 +71,7 @@
         const getWeather = async (url, position, key) => {
             const params = { lat: position.lat, lon: position.lon, appid: key, units: 'metric' }
             const result = await $.ajax({ url: url, data: params })
-            // const sunrise1 = new Date(result.current.sunrise * 1000)
-            // const sunset1 = new Date(result.current.sunset * 1000)
-            // const sunrise = `${new Date(result.current.sunrise * 1000).getHours()}시 ${new Date(result.current.sunrise * 1000).getMinutes()}분`
-            //const sunset = `${new Date(result.current.sunset * 1000).getHours()}시 ${new Date(result.current.sunset * 1000).getMinutes()}분`
-            // const feels_like = result.current.feels_like;
-            // const humidity = result.current.humidity;
-            // const sunrise = result.current.sunrise;
-            // const sunset = result.current.sunset;
-            // const temp = result.current.temp;
-            // const uvi = result.current.uvi;
-            // const weather = result.current.weather[0].main;
+            
             return {
                 humidity: `${result.current.humidity}%`,
                 feels_like: `${result.current.feels_like}도`,

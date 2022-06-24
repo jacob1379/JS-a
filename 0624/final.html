@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>연습하기</title>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        body {
+            height: 100vh;
+            background-color: bisque;
+        }
+
+        #app {
+            width: 600px;
+            border: 1px solid black;
+            margin: 0 auto;
+        }
+
+        #input {
+            width: 500px;
+        }
+
+        .title {
+            display: inline-block;
+            width: 400px;
+        }
+
+        .done {
+            text-decoration: line-through;
+        }
+    </style>
+
+    <script>
+        // 1.할 일 정의 
+        // 2.할 일 출력
+        // 3.css 추가
+        // 4.이벤트 핸들러 추가
+        // 5.할일을 추가하자
+        // 6.동적으로 추가된 DOM 객체에 대한 이벤트 처리
+        // 7.완료
+
+        const addTodos = (todos) => {
+            todos.push({ title: $('#input').val(), done: false }); // 배열에 값을 넣는 함수 push()
+            printTodos(todos); // val() - input,select,textarea 등의 form element에서 값을 구한다.
+        }
+
+
+        const printTodos = (todos) => {
+            const $ui = $('#todos')
+            $ui.empty();
+            // attr은 속성의 값을 변경
+            // $li.attr('class','first').attr('class','second'); -> <li class="second">
+
+            // 속성 관리 : addClass(), removeClass()
+            // $li.addClass('first').addClasss('second')
+            todos.forEach((todo, index) => {
+                const $li = $('<li>').attr('data-index', index).appendTo($ui)
+                if (todo.done === true) {
+                    $('<span class="title">').attr('data-index', index).text(todo.title + "(완료)").addClass('done').appendTo($li)
+                } else {
+                    $('<span class="title">').attr('data-index', index).text(todo.title).appendTo($li)
+                }
+                $('<span>').attr('data-index', index).text('X').attr('class', 'close').appendTo($li)
+            })
+        }
+
+        $(document).ready(function () { // const 참조변수는 A객체를 가리키다 B객체를 가리키게 변경할 수 없다.
+            const todos = [
+                { title: '영화보기', done: false }, // done - 완료 여부
+                { title: '쇼핑하기', done: false },
+                { title: '돈까스먹기', done: true },
+                { title: '공부하기', done: false }
+            ]
+
+            printTodos(todos);
+
+            // #input, #add, .title, .close 에 이벤트가 걸린다.
+            $('#add').click(function () {
+                addTodos(todos);
+            })
+            $('#input').keyup(function (e) { // 텍스트입력엔 keyup 함수, keyCode 카멜입력방식 주의
+                if (e.keycode === 13) alert('확인') // 운영체제마다 키코드 숫자가 다르다 , 그리고 if문 다음에 문장이 하나면 중괄호 생략가능
+            })
+            $('#todos').on('click', '.title', function () { // 선택자 2개 이상일때 on 사용
+                todos[$(this).attr('data-index')].done = !todos[$(this).attr('data-index')].done;
+                printTodos(todos); // 논리 부정 연산자 (참을 거짓으로 거짓을 참으로 바꾼다)
+            })
+            $('#todos').on('click', '.close', function () {
+                todos.splice($(this).attr('data-index'), 1)
+                printTodos(todos);
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" id="input" placeholder="입력 후 엔터!">
+        <button id="add">추가</button>
+        <ul id="todos">
+        </ul>
+    </div>
+</body>
+
+</html>

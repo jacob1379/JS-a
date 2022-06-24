@@ -3,29 +3,39 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>연습하기</title>
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
+    <title>Document</title>
     <style>
         body {
             height: 100vh;
-            background-color: bisque;
+            background-color: blanchedalmond;
         }
 
-        #app {
+        #box {
             width: 600px;
             border: 1px solid black;
             margin: 0 auto;
         }
 
+        #box2 {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
         #input {
-            width: 500px;
+            width: 300px;
         }
 
         .title {
             display: inline-block;
-            width: 400px;
+            width: 300px;
         }
 
         .done {
@@ -34,68 +44,60 @@
     </style>
 
     <script>
-        // 1.할 일 정의 
-        // 2.할 일 출력
-        // 3.css 추가
-        // 4.이벤트 핸들러 추가
-        // 5.할일을 추가하자
-        // 6.동적으로 추가된 DOM 객체에 대한 이벤트 처리
-        // 7.완료
 
         const addTodos = (todos) => {
-            todos.push({ title: $('#input').val(), done: false });
-            printTodos(todos);
+            todos.push({ title: $('#input').val(), done: false })
+            todosPrint(todos)
         }
 
-
-        const printTodos = (todos) => {
-            const $ui = $('#todos')
-            $ui.empty();
+        const todosPrint = (todos) => {
+            const $ul = $('#ul')
+            $ul.empty()
             todos.forEach((todo, index) => {
-                const $li = $('<li>').attr('data-index', index).appendTo($ui)
+                const $li = $('<li>').attr('data-no', index).appendTo($ul)
                 if (todo.done === true) {
-                    $('<span class="title">').attr('data-index', index).text(todo.title + "(완료)").addClass('done').appendTo($li)
+                    $('<span class="title">').attr('data-no', index).text(todo.title + `(완료)`).addClass('done').appendTo($li)
                 } else {
-                    $('<span class="title">').attr('data-index', index).text(todo.title).appendTo($li)
+                    $('<span class="title">').attr('data-no', index).text(todo.title).appendTo($li)
                 }
-                $('<span>').attr('data-index', index).text('X').attr('class', 'close').appendTo($li)
+                $('<spna class="close">').attr('data-no', index).text('X').appendTo($li)
             })
         }
 
         $(document).ready(function () {
-            const todos = [
-                { title: '영화보기', done: false },
-                { title: '쇼핑하기', done: false },
-                { title: '돈까스먹기', done: true },
-                { title: '공부하기', done: false }
-            ]
+            const todos = [{ title: '수영하기', done: false }, { title: '치킨먹기', done: true }, { title: '데이트하기', done: false }, { title: '영화보기', done: false }];
+            todosPrint(todos);
 
-            printTodos(todos);
-
-            $('#add').click(function () {
-                addTodos(todos);
+            $('#button').click(function () {
+                addTodos(todos)
             })
             $('#input').keyup(function (e) {
-                if (e.keycode === 13) alert('확인')
+                if (e.keyCode === 13) addTodos(todos)
             })
-            $('#todos').on('click', '.title', function () {
-                todos[$(this).attr('data-index')].done = !todos[$(this).attr('data-index')].done;
-                printTodos(todos); // 논리 부정 연산자 (참을 거짓으로 거짓을 참으로 바꾼다)
+            $('#ul').on('click', '.title', function () {
+                todos[$(this).attr('data-no')].done = !todos[$(this).attr('data-no')].done;
+                todosPrint(todos);
             })
-            $('#todos').on('click', '.close', function () {
-                todos.splice($(this).attr('data-index'), 1)
-                printTodos(todos);
+            $('#ul').on('click', '.close', function () {
+                todos.splice($(this).attr('data-no'), 1)
+                todosPrint(todos);
             })
+
         })
+
     </script>
 </head>
 
 <body>
-    <div id="app">
-        <input type="text" id="input" placeholder="입력 후 엔터!">
-        <button id="add">추가</button>
-        <ul id="todos">
-        </ul>
+    <div id="box">
+        <h1>To do list</h1>
+        <div id="box2">
+            <input type="text" id="input" placeholder="해보자 해보자 해보는거야"><br>
+            <button id="button">추가</button>
+            <ul id="ul">
+
+            </ul>
+        </div>
     </div>
 </body>
 

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <title>5. 할일을 추가하자</title>
+    <style>
+        body {
+            height: 100vh;
+            background-color: #ddd;
+        }
+
+        #app {
+            width: 600px;
+            margin: 0 auto;
+            background-color: #eee;
+            border: 1px solid darkblue;
+        }
+
+        #input {
+            width: 530px;
+        }
+
+        .title {
+            display: inline-block;
+            width: 400px;
+        }
+
+        .done {
+            text-decoration: line-through;
+        }
+    </style>
+    <script>
+        const addTodo = (todos) => {
+            console.log()
+            todos.push({ title: $("#input").val(), done: false });  // 배열에 값을 넣는 함수 push(), // input,select,textarea 등의 form element에서 값을 구한다.
+            printTodolist(todos); // val() - input,select,textarea 등의 form element에서 값을 구한다.
+        }
+
+        const printTodolist = (todos) => {
+            const $ul = $("#todos");
+            $ul.empty();
+            todos.forEach((todo, index) => {
+                const $li = $("<li>").attr("class", "todo").attr("data-index", index).appendTo($ul);
+                if (todo.done == true) {
+                    $("<span class='title'>").text(todo.title + " (완료)").addClass("done").attr("data-index", index).appendTo($li);
+                } else {
+                    $("<span class='title'>").text(todo.title).attr("data-index", index).appendTo($li);
+                }
+                $("<span>").attr("class", "close").text("X").attr("data-index", index).appendTo($li);
+            });
+        }
+
+        $(document).ready(() => {
+            // const 참조변수는 A객체를 가리키다 B객체를 가리키게 변경할 수 없다.
+            const todos = [
+                { title: "영화보기", done: false },
+                { title: "주말 산책", done: true },
+                { title: "ES6 학습", done: false },
+                { title: "잠실 야구장", done: false }
+            ];
+            printTodolist(todos);
+
+            $("#add").click(function () {
+                addTodo(todos);
+            });
+
+            $("#input").keyup(function (e) {
+                if (e.keyCode == 13)
+                    addTodo(todos);
+            });
+
+            $(".title").click(function () {
+                alert("할일 클릭");
+            });
+
+            $(".close").click(function () {
+                alert("삭제 클릭");
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" id="input" placeholder="입력 후 엔터!">
+        <button id="add">추가</button>
+        <ul id="todos">
+        </ul>
+    </div>
+</body>
+
+</html>

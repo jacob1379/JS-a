@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>2. 할 일 출력</title>
+  <script>
+    const printTodolist = (todos) => {
+      const $ul = $("#todos");
+      $ul.empty();
+      todos.forEach((todo, index) => {
+        const $li = $("<li>").attr("class", "todo").attr("data-index", index).appendTo($ul);
+
+        // attr은 속성의 값을 변경
+        // $li.attr('class','first').attr('class','second'); -> <li class="second">
+
+        // 속성 관리 : addClass(), removeClass()
+        // $li.addClass('first').addClasss('second')
+
+        if (todo.done == true) {
+          $("<span class='title'>").text(todo.title + " (완료)").addClass("done").appendTo($li);
+        } else {
+          $("<span class='title'>").text(todo.title).appendTo($li);
+        }
+        $("<span>").attr("class", "close").text("X").appendTo($li);
+      });
+    }
+
+    $(document).ready(() => {
+      const todos = [
+        { title: "영화보기", done: false },
+        { title: "주말 산책", done: true },
+        { title: "ES6 학습", done: false },
+        { title: "잠실 야구장", done: false }
+      ];
+      printTodolist(todos);
+    });
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" id="input" placeholder="입력 후 엔터!">
+    <button id="add">추가</button>
+    <ul id="todos">
+    </ul>
+  </div>
+</body>
+
+</html>

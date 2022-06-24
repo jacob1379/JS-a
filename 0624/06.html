@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>6. 동적으로 추가된 DOM 객체에 대한 이벤트 처리</title>
+  <style>
+    body {
+      height: 100vh;
+      background-color: #ddd;
+    }
+
+    #app {
+      width: 600px;
+      margin: 0 auto;
+      background-color: #eee;
+      border: 1px solid darkblue;
+    }
+
+    #input {
+      width: 530px;
+    }
+
+    .title {
+      display: inline-block;
+      width: 400px;
+    }
+
+    .done {
+      text-decoration: line-through;
+    }
+  </style>
+  <script>
+    const addTodo = (todos) => {
+      console.log()
+      todos.push({ title: $("#input").val(), done: false });
+      printTodolist(todos);
+    }
+
+    const printTodolist = (todos) => {
+      const $ul = $("#todos");
+      $ul.empty();
+      todos.forEach((todo, index) => {
+        const $li = $("<li>").attr("class", "todo").attr("data-index", index).appendTo($ul);
+        if (todo.done == true) {
+          $("<span class='title'>").text(todo.title + " (완료)").addClass("done").attr("data-index", index).appendTo($li);
+        } else {
+          $("<span class='title'>").text(todo.title).attr("data-index", index).appendTo($li);
+        }
+        $("<span>").attr("class", "close").text("X").attr("data-index", index).appendTo($li);
+      });
+    }
+
+    $(document).ready(() => {
+      const todos = [
+        { title: "영화보기", done: false },
+        { title: "주말 산책", done: true },
+        { title: "ES6 학습", done: false },
+        { title: "잠실 야구장", done: false }
+      ];
+      printTodolist(todos);
+
+      $("#add").click(function () {
+        addTodo(todos);
+      });
+
+      $("#input").keyup(function (e) {
+        if (e.keyCode == 13)
+          addTodo(todos);
+      });
+
+      $("#todos").on("click", ".title", function () {  // 선택자 2개 이상일때 on 사용
+        alert("할일 클릭");
+      });
+
+      $("#todos").on("click", ".close", function () {
+        alert("삭제 클릭");
+      });
+    });
+  </script>
+</head>
+
+<body>
+  <div id="app">
+    <input type="text" id="input" placeholder="입력 후 엔터!">
+    <button id="add">추가</button>
+    <ul id="todos">
+    </ul>
+  </div>
+</body>
+
+</html>

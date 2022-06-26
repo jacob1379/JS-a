@@ -16,7 +16,6 @@
 
         function printApiData({ contacts }) {
             const $tbody = $('#list');
-
             $tbody.empty(); // empty는 자식을 지운다, remove는 자신을 지운다.
             for (const c of contacts) {
                 const $tr = $('<tr>').appendTo($tbody);

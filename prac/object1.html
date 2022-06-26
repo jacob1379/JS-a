@@ -59,7 +59,8 @@ kim.sum = function(){
 }
 var lee = new Person('lee',10,10,10);
 
-<ES6부터 적용되는 class 함수> <!--이걸 더 많이 쓰자.-->
+<ES6부터 적용되는 class 함수>
+    - 최근의 코드를 옛날 코드로 변환시켜주는 babel을 사용할 수 있다.
 
 class Person{
     constructor(name,first,second){ // 약속된 이름으로 바꾸면 안됩니다.
@@ -83,5 +84,3 @@ var kim = new Person('kim',10,20);
 kim.sum = function(){
     return 'this : ' + (this.first+this.second);       ----> 특정 객체의 메소드만 수정할 때
 }
-
-부스트코스 js편 객체고급 16-1번 듣기!!!!!!!!!!!!!!!!!!!!!

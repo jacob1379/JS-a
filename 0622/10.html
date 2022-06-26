@@ -39,9 +39,10 @@
         $('#parent').click(function () { alert('부모 클릭') })
         $('#child').click(function (e) { e.stopPropagation(); alert('자식 클릭') })
 
+        // 클릭이 겹칠 때
         // 이벤트 캡쳐링 (capture)
         // 이벤트가 발생한 곳을 찾는다. 넓은 곳 -> 좁은 곳으로 찾는다
-        // #grand - > #parent -> #child
+        // #grand -> #parent -> #child
 
         // 이벤트 버블링 (bubble)
         // 이벤트를 실행할 때는 캡쳐의 역순으로 실행

@@ -81,8 +81,8 @@
             await getAir(cno);
 
 
-            $('#buttons button').click(function () {
-                const cno = parseInt($(this).attr('data-cno'))
+            $('#buttons button').click(async function () {
+                const cno = parseInt($(this).attr('data-cno'));
             })
         })
     </script>

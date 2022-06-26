@@ -85,6 +85,8 @@
                 if (e.keycode === 13) alert('확인') // 운영체제마다 키코드 숫자가 다르다 , 그리고 if문 다음에 문장이 하나면 중괄호 생략가능
             })
             $('#todos').on('click', '.title', function () { // 선택자 2개 이상일때 on 사용
+                // 동적으로 추가된 요소의 이벤트를 처리하려면
+                // $(넓은 선택자).on('이벤트이름', 선택자, 함수)
                 todos[$(this).attr('data-index')].done = !todos[$(this).attr('data-index')].done;
                 printTodos(todos); // 논리 부정 연산자 (참을 거짓으로 거짓을 참으로 바꾼다)
             })

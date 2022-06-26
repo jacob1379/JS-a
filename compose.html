@@ -1,0 +1,105 @@
+class Person{
+    constructor(name, first, second){
+        this.name = name;
+        this.first = first;
+        this.second = second;
+    }
+    sum(){
+        return this.first+this.second;
+    }
+}
+class PersonPlus extends Person{          ----> 상속
+    constructor(name, first, second, third){
+        super(name, first, second);                ----> super
+        this.third = third;
+    }
+    sum(){
+        return super.sum()+this.third;
+    }
+    avg(){
+        return (this.first+this.second+this.third)/3;
+    }
+}
+ 
+var kim = new PersonPlus('kim', 10, 20, 30);
+console.log("kim.sum()", kim.sum());
+console.log("kim.avg()", kim.avg());
+
+<inherit 상속>
+상속은 부모 클래스에서 자식 클래스에게 속성을 그대로 부여한다.
+상속이 없다면 코드의 중복이 증가하고 추가적인 기능이 있을 때 직관적으로 와닿지 않는 단점이 있다.
+extends keyword를 이용하여 상속을 구현할 수 있다.
+
+<super> 
+super()를 통해 부모의 생성자를 호출하여 변수를 초기화 할 수 있으며
+super를 통해서 부모의 속성들에 접글할 수 있다.
+super가 없다면 상속에 대한 의의를 잃어 코드의 중복성이 증가하게되며
+추가적인 변수가 생길 시 모든 것을 재정의함으로써 유지보수적인 측면에서 되게 비효율적이다.
+super를 이용하여 코드의 중복을 제거할 수 있다.
+
+<객체 상속>
+다른 언어에서는 객체의 메소드가 클래스에서 이미 결정되어 있다. 또한 객체간에는 상속이 불가능하다.
+반면 자바스크립트에서는 프로토타입 링크를 활용해 프로토타입 객체와 서브객체 간의 상속이 가능하다.
+
+<__proto__>
+prototype은 생성자 함수 바깥에서 메소드를 정의해 객체가 생성될 때마다 호출되는 것이 아니라
+모든 객체들이 프로토타입을 같이 쓰는 방식.
+__proto__는 객체 간의 상속 관계를 정의해, 한 객체의 속성을 다른 객체가 상속받을 수 있게 함.
+
+var superObj = {superVal:'super'}
+var subObj = {subVal:'sub'}
+subObj.__proto__ = superObj;         <---- superObj의 객체를 상속받는다.
+
+var subObj = Object.create(superObj);   <---- 위와 같이 객체 상속 받는 식 ( 더 권장함 )
+subObj.subVal = 'sub';
+debugger;
+
+<object.create 함수>
+Object.create를 사용해서 객체를 상속하는 새로운 객체를 만들 수 있습니다.
+__proto__와 같은 기능
+
+<call>
+call 메소드의 인자로 객체를 지정하게 되면 해당 함수의 this는 인자로 받은 객체가 됩니다. 
+두번째 인자부터 객체의 파라미터가 들어간다.
+
+var kim = {name:'kim',first:10,second:20}
+var lee = {name:'lee',first:10,second:10}
+lee.__proto__ = kim
+
+function sum(prefix){ 
+    return prefix+ (this.first + this.second);}
+    
+console.log("sum.call(kim)",sum.call(kim,'=> ')); //sum.call(kim) => 30
+
+<bind>
+함수.call(객체) -> 함수 안에 있는 this를 원하는 객체의 this로 바꾼다.
+bind는 원하는 함수 안에 있는 this를 고정시킨다.
+
+<!-------------------------------------------------------------------->
+
+자바스크립트를 어렵다고 느끼는 이유는 3가지가 있는 것 같습니다.
+
+
+첫 번째는 자바스크립트를 쉽다고 생각하기 때문인 것 같습니다.
+실제로는 쉽지 않은데 쉽다고 생각하면 더 어렵게 느껴질 수 있기 때문입니다.
+우리는 이 언어가 쉽기 때문에 사용하는 것이 아니라 가치 있기 때문에 사용한다는 걸
+생각해보셨으면 좋겠습니다.
+
+두 번째는 자바스크립트의 언어가 가지고 있는 아쉬움 때문인 것 같습니다. 
+대표적인 예로 prototype과 __proto__가 있습니다.
+하지만 우리가 이러한 아쉬움을 고칠 수 있는게 아니기 때문에
+무조건 비판할 수는 없다고 생각합니다.
+
+마지막으로는 자바스크립트의 극단적인 유연함 때문인 것 같습니다.
+대표적인 예로는 함수가 있습니다.
+자바스크립트의 함수는 정말 여러가지 모습을 가지고 있습니다. 
+자바스크립트는에서 함수는 혼자 사용될 수도 있고,
+new가 앞에 있으면 객체를 만드는 신이고,
+call을 뒤에 붙이면 용병이고,
+bind를 붙이면 분신술을 부리는 놀라운 존재입니다.
+이러한 자유로움은 혼란을 불러오기도 합니다. 
+혼란을 피할 수 없다면 자유를 즐기십시오.
+
+여러분들이 축하 받아야할 이유는
+우선 자바스크립트를 통해서 클래스 기반의 객체 지향 언어와 프로토타입 기반의 객체 지향 언어
+모두를 이해하고 있는 사람이 되었기 떄문입니다.

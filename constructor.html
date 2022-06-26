@@ -1,0 +1,85 @@
+constructor 생성자 함수 (객체를 만드는 공장)
+
+생성자 함수의 역할은 두가지였습니다.
+1. 객체를 만든다.
+2. 객체의 초기 상태를 정의한다.
+
+var kim = {
+    name: 'kim',
+    first: 10, //첫번째 게임 점수
+    second: 20,  // 두번째 게임 점수 
+    sum:function(){ // 게임 접수 합계 함수
+        return this.first+this.second;
+    }
+}
+
+var lee = {
+    name: 'lee',
+    first: 10, 
+    second: 10,
+    sum:function(){
+        return this.first+this.second;
+    }  
+}
+
+이런 객체가 1억개라면? 그래서 이렇게 쓴다.
+
+function Person(name,first,second,third){
+    this.name = name;
+    this.first = first;
+    this.second = second;
+    this.third = third;
+    this.sum = function(){ 
+        return this.first+this.second+this.third;
+    }
+}
+
+var kim = new Person('kim',10,20,30);      ----> 각 개체마다 다른 값을 적용할 수 있다.
+var lee = new Person('lee',10,10,10);
+
+근데 여기서 생성되는 메소드는 객체가 생성되면 매번 호출되므로 밖에 prototype으로 빼서 공통된 함수를 한 번에 쓴다.
+prototype을 이용하여 객체가 생성될 때마다 걸리는 시간과 할당해야하는 메모리를 줄여 성능을 높일 수 있을 뿐만 아니라
+prototype의 하위에 메서드를 정의함으로써 코드 수정 즉, 유지보수와 생산성에도 용이하다.
+
+function Person(name,first,second,third){
+    this.name = name;
+    this.first = first;
+    this.second = second;
+    this.third = third;
+    
+}
+Person.prototype.sum = function(){ 
+    return 'prototype : ' + (this.first+this.second+this.third);
+}
+
+var kim = new Person('kim',10,20,30);
+
+kim.sum = function(){
+    return 'this : ' + (this.first+this.second+this.third);   ----> 특정 객체의 메소드만 수정할 때
+}
+var lee = new Person('lee',10,10,10);
+
+ES6부터 적용되는 class 함수
+
+class Person{
+    constructor(name,first,second){ // 약속된 이름으로 바꾸면 안됩니다.
+        this.name = name;
+        this.first = first;
+        this.second = second;
+        console.log('constructor');
+    }
+    sum(){ 
+        return 'prototype : ' + (this.first+this.second);       ----> class 내부에 메소드 정의하기. (권장)
+    }
+}
+
+Person.prototype.sum = function(){ 
+    return 'prototype : ' + (this.first+this.second+this.third);    ----> prototype을 이용해 추가하기.
+}
+
+var kim = new Person('kim',10,20);
+
+var kim = new Person('kim',10,20);
+kim.sum = function(){
+    return 'this : ' + (this.first+this.second);       ----> 특정 객체의 메소드만 수정할 때
+}

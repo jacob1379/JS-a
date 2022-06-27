@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Document</title>
+    <script>
+        let pageno = 1, pagesize = 10, totalcount = 115, blocksize = 5;
+        /*
+            pageno  prev    start   end      next
+            1~5     0       1       5        6
+            6~10    5       6       10       11
+            11~15   10      11      15->12   16->0
+        */
+        let countOfPage = Math.ceil(totalcount / pagesize);
+        let prev = Math.floor((pageno - 1) / blocksize) * blocksize;
+        let start = prev + 1;
+        let end = prev + blocksize;
+        let next = end + 1;
+        if (end >= countOfPage) {
+            end = countOfPage;
+            next = 0;
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>

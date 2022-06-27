@@ -5,100 +5,23 @@
     <meta charset="UTF-8">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <title>Document</title>
     <style>
-        body {
-            height: 100vh;
-            background-color: blanchedalmond;
-        }
-
-        #box {
-            width: 600px;
-            border: 1px solid black;
-            margin: 0 auto;
-        }
-
-        #box2 {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        #input {
-            width: 300px;
-        }
-
-        .title {
-            display: inline-block;
-            width: 300px;
-        }
-
-        .done {
-            text-decoration: line-through;
-        }
     </style>
 
     <script>
-
-        const addTodos = (todos) => {
-            todos.push({ title: $('#input').val(), done: false })
-            todosPrint(todos)
-        }
-
-        const todosPrint = (todos) => {
-            const $ul = $('#ul')
-            $ul.empty()
-            todos.forEach((todo, index) => {
-                const $li = $('<li>').attr('data-no', index).appendTo($ul)
-                if (todo.done === true) {
-                    $('<span class="title">').attr('data-no', index).text(todo.title + `(완료)`).addClass('done').appendTo($li)
-                } else {
-                    $('<span class="title">').attr('data-no', index).text(todo.title).appendTo($li)
-                }
-                $('<spna class="close">').attr('data-no', index).text('X').appendTo($li)
-            })
-        }
-
-        $(document).ready(function () {
-            const todos = [{ title: '수영하기', done: false }, { title: '치킨먹기', done: true }, { title: '데이트하기', done: false }, { title: '영화보기', done: false }];
-            todosPrint(todos);
-
-            $('#button').click(function () {
-                addTodos(todos)
-            })
-            $('#input').keyup(function (e) {
-                if (e.keyCode === 13) addTodos(todos)
-            })
-            $('#ul').on('click', '.title', function () {
-                todos[$(this).attr('data-no')].done = !todos[$(this).attr('data-no')].done;
-                todosPrint(todos);
-            })
-            $('#ul').on('click', '.close', function () {
-                todos.splice($(this).attr('data-no'), 1)
-                todosPrint(todos);
-            })
-
-        })
-
     </script>
+    <title>To do list 만들기</title>
 </head>
 
 <body>
-    <div id="box">
+    <!-- <div id="box">
         <h1>To do list</h1>
-        <div id="box2">
-            <input type="text" id="input" placeholder="해보자 해보자 해보는거야"><br>
-            <button id="button">추가</button>
-            <ul id="ul">
+        <input type="text" id="input" placeholder="입력하세요">
+        <button id="button">추가하기</button>
+        <ul id="ul">
 
-            </ul>
-        </div>
-    </div>
+        </ul>
+    </div> -->
 </body>
 
 </html>

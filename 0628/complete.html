@@ -40,7 +40,7 @@
                 $('<a>').attr('href', `read.html?no=${contact.no}`).text(contact.name).appendTo($td)
                 $('<td>').text(contact.address).appendTo($tr)
                 $('<td>').text(contact.tel).appendTo($tr)
-                $('<td>').img('scr', 'contact.photo').appendTo($tr)
+                const $td2 = $('<td>').appendTo($tr)
             })
         }
 
@@ -71,7 +71,7 @@
         }
         const printPagination = ({ blocksize, pageno, prev, start, end, next }) => {
             const $ul = $('#page .pagination')
-            const url = "re.html?pageno="
+            const url = "complete.html?pageno="
             if (prev > 0) {
                 const $li = $('<li class="page-item">').appendTo($ul)
                 $(`<a class="page-link" href="${url}${prev}">`).text('이전').appendTo($li)
@@ -109,6 +109,7 @@
                     <th>이름</th>
                     <th>주소</th>
                     <th>연락처</th>
+                    <th>사진</th>
                 </tr>
             </thead>
             <tbody id="list">

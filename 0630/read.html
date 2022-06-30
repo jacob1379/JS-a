@@ -21,7 +21,7 @@
         }
 
         const getResponse = async (api, no) => {
-            return await $.ajax(api + no);
+            return await $.ajax(api + no);  // get 값을 요청할때 파라미터로 나옴
         }
 
         const printContacts = ({ no, name, photo, tel, address }) => {

@@ -1,0 +1,10 @@
+mvc
+	get : 상태변경x -> read
+	post : 상태가 변경된다
+
+rest
+	get : read
+	post : create  // 사진,파일이 포함되면 put은 안됨
+	put : update
+	delete : delete
+	(mvc의 post를 post, update, delete로 나눔)

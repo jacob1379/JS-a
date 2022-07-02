@@ -1,0 +1,28 @@
+#page {
+    width : 800px;
+    margin : 0 auto;
+}
+header {
+    height: 100px;
+    background-color: aquamarine;
+}
+nav {
+    height : 100px;
+    background-color: antiquewhite;
+}
+#two {
+    display: flex;
+    justify-content: space-between;
+}
+aside {
+    flex-grow: 1;
+    background-color: lightcoral;
+}
+section {
+    flex-grow: 3;
+    min-height: 500px;
+}
+footer {
+    height: 50px;
+    background-color: lightgray;
+}

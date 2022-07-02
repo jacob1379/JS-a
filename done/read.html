@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Document</title>
+    <script>
+
+        const getNo = () => {
+            const no = parseInt(location.search.substr(4));
+            if(isNaN(no)) {
+                location.href = "/done/sample.html"
+            } else {
+                return no;
+            }
+        }
+
+        const getResponse =async (no) => {
+            const url = 'http://sample.bmaster.kro.kr/contacts/';
+            return await $.ajax(url + no);
+        }
+
+        const printContacts = ({ no, name, photo, tel, address }) => {
+            $('#no').text(no)
+            $('#name').text(name)
+            $('#tel').text(tel)
+            $('#address').text(address)
+            $('#photo').attr('src', photo)
+        }
+
+        $(document).ready(async function() {
+            const no = getNo()
+            const response = await getResponse(no);
+            console.log(response)
+            printContacts(response);
+        })
+
+    </script>
+</head>
+<body>
+    <table>
+        <tbody>
+            <tr>
+                <td id="no">
+                    
+                </td>
+            </tr>
+            <tr>
+                <td id="name">
+
+                </td>
+            </tr>
+            <tr>
+                <td id="tel">
+
+                </td>
+            </tr>
+            <tr>
+                <td id="address">
+
+                </td>
+            </tr>
+            <tr>
+                <td><img id="photo">
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

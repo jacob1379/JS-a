@@ -14,7 +14,7 @@
                 const response = await $.ajax({
                     url: "http://sample.bmaster.kro.kr/contacts/",
                     method: 'post',
-                    data: $('#join_form').serialize()
+                    data: $('#join_form').serialize() //form을 대상으로 serialize() 메소드를 사용하면 폼의 객체들을 한 번에 받을 수가 있습니다.
                 }) //post로 요청을 넘길때는 객체로
                 location.href = "/0630/01.html"
             })

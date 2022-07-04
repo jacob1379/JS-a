@@ -8,3 +8,12 @@ rest
 	put : update
 	delete : delete
 	(mvc의 post를 post, update, delete로 나눔)
+
+
+zulu / sts(eclipse에 spring 깔아놓은것)
+자바 프로젝트들은 jdk 위치를 인식한다
+
+lombok 다운받고 install 
+프로젝트 생성 후 configure / convert maven 선택해서
+maven pom file 복사해서 넣기 (버전아래)
+아니면 maven lombok 치고 dipository 가서 최신거 복사 (주의, dependencies 수동입력)

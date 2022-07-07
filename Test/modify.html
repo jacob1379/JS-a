@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/Test/css/main.css">
+    <title>modify</title>
+
+    <script>
+
+        const getBno = () => {
+            const bno = parseInt(location.search.substr(5));
+            if (isNaN(bno))
+                location.href = '/Test/list.html'
+            else
+                return bno
+        }
+
+        const getResponse = async (url, bno) => {
+            return await $.ajax(url + bno);
+        }
+
+        const printBoard = ({ bno, content, title, writer, writeTime, attachment }) => {
+            $('#bno').text(bno);
+            $('#content').text(content);
+            $('#title').text(title);
+            $('#writer').text(writer);
+            $('#writeTime').text(writeTime);
+            $('#attachment').attr('src', attachment);
+        }
+
+        $(document).ready(async function () {
+            const url = 'http://192.168.0.34:8081/board/'
+            const bno = getBno();
+            const response = await getResponse(url, bno);
+            console.log(response);
+            printBoard(response);
+
+            $('#btn').click(async function () {
+                //const url = `http://192.168.0.34:8081/board/${bno}`;
+                const formData = new FormData(document.querySelector('#modify_form'))
+                console.log(formData)
+                const response = await $.ajax({
+                    url: url + bno,
+                    method: 'put',
+                    data: (bno, formData),
+                    processData: false,
+                    contentType: false
+                })
+                location.href = '/Test/list.html'
+            })
+
+            $('#del').click(async function () {
+                await $.ajax({
+                    url: url + bno,
+                    method: 'delete'
+                })
+                location.href = '/Test/list.html'
+            })
+
+        })
+    </script>
+
+</head>
+
+<body>
+    <div id="page">
+        <header></header>
+        <nav></nav>
+        <div id="main">
+            <aside></aside>
+            <section>
+                <table>
+                    <tbody id="list">
+                        <tr>
+                            <td id="bno"></td>
+                        </tr>
+                        <tr>
+                            <td id="content"></td>
+                        </tr>
+                        <tr>
+                            <td id="title"></td>
+                        </tr>
+                        <tr>
+                            <td id="writer"></td>
+                        </tr>
+                        <tr>
+                            <td id="writeTime"></td>
+                        </tr>
+                        <tr>
+                            <td><img id="attachment"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <form id="modify_form">
+                    글 제목 : <input type="text" name="title"><br>
+                    글 내용 : <input type="text" name="content"><br>
+                    사진 : <input type="file" name="attachment"><br>
+                    <button id="btn">변경</button>
+                    <button id="del">삭제</button>
+                </form>
+            </section>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+
+</html>

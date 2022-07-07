@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/Test/css/main.css">
+    <title>write</title>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#btn').click(async function (e) {
+                e.preventDefault();
+                const url = 'http://192.168.0.34:8081/board/new'
+                const formData = new FormData(document.querySelector('#form'));
+                const response = await $.ajax({
+                    url: url,
+                    method: 'post',
+                    data: formData,
+                    processData: false,
+                    contentType: false
+                })
+
+                location.href = "/Test/list.html";
+            })
+        })
+    </script>
+</head>
+
+<body id="page">
+    <div>
+        <header></header>
+        <nav></nav>
+        <div id="main">
+            <aside></aside>
+            <section>
+                <form id="form">
+                    제목 : <input type="text" id="title" name="title"><br>
+                    내용 : <input type="text" id="content" name="content"><br>
+                    작성자 : <input type="text" id="writer" name="writer"><br>
+                    <input type="file" id="attachment" name="attachment"><br>
+                    <button id="btn">추가</button>
+                </form>
+            </section>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+
+</html>

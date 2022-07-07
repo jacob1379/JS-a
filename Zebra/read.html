@@ -22,12 +22,21 @@
 
         const printBoard = ({ bno, content, title, writer, writeTime, attachment }) => {
             const $list = $('#list')
+
             const $tr = $('<tr>').appendTo($list)
             $('<td>').text(bno).appendTo($tr);
-            $('<td>').text(content).appendTo($tr);
-            $('<td>').text(title).appendTo($tr);
-            $('<td>').text(writer).appendTo($tr);
-            $('<td>').text(writeTime).appendTo($tr);
+            const $tr2 = $('<tr>').appendTo($list)
+            $('<td>').text(content).appendTo($tr2);
+            const $tr3 = $('<tr>').appendTo($list)
+            $('<td>').text(title).appendTo($tr3);
+            const $tr4 = $('<tr>').appendTo($list)
+            $('<td>').text(writer).appendTo($tr4);
+            const $tr5 = $('<tr>').appendTo($list)
+            $('<td>').text(writeTime).appendTo($tr5);
+            const $tr6 = $('<tr>').appendTo($list)
+            const $td = $('<td>').appendTo($tr6);
+            $('<img>').attr('src', attachment).appendTo($td)
+
         }
         $(document).ready(async function () {
             const bno = getBno();

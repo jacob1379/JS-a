@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" href="/css/css.css">
+    <script src="/script/main.js"></script>
+
+    <style>
+        #box {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+
+    <title>Document</title>
+    <script>
+        $(document).ready(function () {
+            init();
+        })
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <header></header>
+        <nav></nav>
+        <div id="main">
+            <aside></aside>
+            <section>
+                <div id="box">
+                    <h1>서버에 연결할 수 없습니다.</h1>
+                    <img src="/image/error.png">
+                </div>
+            </section>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+
+</html>

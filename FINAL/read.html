@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/css.css">
+    <script src="/script/main.js"></script>
+
+    <title>Document</title>
+
+    <script>
+        const getBno = () => {
+            const bno = parseInt(location.search.substr(5))
+            if (isNaN(bno))
+                return location.href = "list.html";
+            return bno
+        }
+
+        const getResponse = async (url, bno) => {
+            try {
+                return await $.ajax(url + bno)
+            } catch (x) {
+                location.href = "/error.html";
+            }
+        }
+
+        const printInfo = ({ bno, title, readCnt, writeTime, attachment, content }) => {
+            $('#bno').text(`번호 : ${bno}`)
+            $('#title').text(`제목 : ${title}`)
+            $('#readCnt').text(`읽기 : ${readCnt}`)
+            $('#writeTime').text(`작성시간 : ${writeTime}`)
+            $('#attachment').attr('src', attachment)
+            $('#content').text(`내용 : ${content}`)
+        }
+
+        $(document).ready(async function () {
+            init();
+            const url = 'http://192.168.0.34:8081/board/'
+            const bno = getBno();
+            const response = await getResponse(url, bno);
+            console.log(response)
+            printInfo(response)
+        })
+    </script>
+</head>
+
+<body>
+    <div id="page">
+        <header></header>
+        <nav></nav>
+        <div id="main">
+            <aside></aside>
+            <section>
+                <table>
+                    <tbody id="info">
+                        <tr>
+                            <td id="bno"></td>
+                        </tr>
+                        <tr>
+                            <td id="title"></td>
+                        </tr>
+                        <tr>
+                            <td id="readCnt"></td>
+                        </tr>
+                        <tr>
+                            <td id="writeTime"></td>
+                        </tr>
+                        <tr>
+                            <td><img id="attachment"></td>
+                        </tr>
+                        <tr>
+                            <td id="content"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+        <footer></footer>
+    </div>
+</body>
+
+</html>

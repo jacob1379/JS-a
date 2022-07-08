@@ -1,20 +1,27 @@
 #page {
-    width : 800px;
+    width: 800px;
     margin: 0 auto;
+    
 }
+
 header, nav, footer {
     height: 50px;
-    background-color: lightblue;
+    background-color: antiquewhite;
 }
+
 #main {
     display: flex;
     justify-content: space-between;
+    
 }
+
 aside {
     flex-grow: 1;
-    background-color: lightcoral;
+    background-color: wheat;
 }
+
 section {
     flex-grow: 3;
-    background-color: lemonchiffon;
+    background-color: white;
+    min-height: 500px;
 }
